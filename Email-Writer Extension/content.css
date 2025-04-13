@@ -1,0 +1,23 @@
+/* content.css */
+
+.ai-tone-dropdown {
+    font-size: 14px;
+    padding: 6px 10px;
+    margin-right: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    color: #333;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s ease;
+}
+
+.ai-tone-dropdown:hover {
+    border-color: #888;
+}
+
+.ai-tone-dropdown:focus {
+    border-color: #1a73e8;
+    box-shadow: 0 0 3px rgba(26, 115, 232, 0.5);
+}

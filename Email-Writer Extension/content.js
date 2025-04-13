@@ -10,6 +10,28 @@ function createAIButton() {
     return button;
 }
 
+function createDropdown() {
+    const dropdown = document.createElement('select');
+    dropdown.className = 'ai-tone-dropdown';
+    dropdown.style.marginRight = '8px';
+    dropdown.style.padding = '6px';
+    dropdown.style.borderRadius = '4px';
+    dropdown.style.border = '1px solid #ccc';
+    dropdown.style.fontSize = '14px';
+    dropdown.style.cursor = 'pointer';
+
+    const options = ['NONE', 'Professional', 'Casual', 'Friendly'];
+    options.forEach(optionText => {
+        const option = document.createElement('option');
+        option.value = optionText.toLowerCase();
+        option.textContent = optionText;
+        dropdown.appendChild(option);
+    });
+
+    return dropdown;
+}
+
+
 function findComposeToolbar() {
     const selectors = [
         '.btC',
@@ -48,6 +70,8 @@ const injectButton = () => {
     }
 
     console.log("Toolbar Found !, \nCreating AI Button");
+
+    const dropdown = createDropdown();
     const button = createAIButton();
 
     button.classList.add('ai-reply-button');
@@ -60,15 +84,16 @@ const injectButton = () => {
             button.disabled = true;
 
             const emailContent = getEmailContent();
+            const selectedTone = dropdown.value;
 
-            const response = await fetch('http://localhost:8080/api/email/generate', {
+            const response = await fetch('https://smart-email-reply-generator.onrender.com/api/email/generate', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
                     "emailContent" : emailContent,
-                    "tone" : "proffestional"
+                    "tone" : selectedTone
                 })
             });
 
